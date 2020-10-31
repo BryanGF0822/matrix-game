@@ -16,5 +16,4 @@ public class MatrixGame {
 		this.firstN = firstN;
 	}
 	
-	
 }
