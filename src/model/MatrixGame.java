@@ -15,9 +15,7 @@ public class MatrixGame {
 	public Node getFirst() {
 		return first;
 	}
-
-
-
+	
 	private void createMatrix() {
 		first = new Node(0,0);
 		createRow(0,0,first);
@@ -33,8 +31,9 @@ public class MatrixGame {
 		}
 	}
 
+	//tocaponer en el primer if j+1 para que me cree  las columnas correctas
 	private void createCol(int i, int j, Node prev, Node rowPrev) {
-		if(j<numCols) {
+		if(j<numCols) {// toca poner j+1
 			Node current = new Node(i, j+1);
 			current.setPrev(prev);
 			prev.setNext(current);
