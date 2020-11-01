@@ -4,9 +4,9 @@ public class Node {
 	
 	private int fil;
 	private int col;
-	
-	
-	private String pos = "" + fil + (char)(col);
+	private String pos;
+	private String mirror;
+	private boolean a;
 	
 	private Node next;
 	private Node prev;
@@ -16,8 +16,26 @@ public class Node {
 	//private String espejo;
 
 	public Node(int f, int c) {
-		fil = f;
+		fil = f+1;
 		col = c;
+		
+		this.next = null;
+		this.prev = null;
+		this.up = null;
+		this.down = null;
+		
+		a = false;
+		
+		char letter = (char)('A' + col);
+		this.pos = fil + "" + letter;
+	}
+	
+	public boolean checkMirror() {
+		if (mirror == "") {
+			return false;
+		}else {
+			return true;
+		}
 	}
 
 	public int getFil() {
@@ -28,8 +46,8 @@ public class Node {
 		return col;
 	}
 
-	public char getNameCol() {
-		return (char)('A' + col);
+	public String getPos() {
+		return pos;
 	}
 
 	public Node getNext() {
@@ -64,7 +82,21 @@ public class Node {
 		this.down = down;
 	}
 	
+	public boolean isA() {
+		return a;
+	}
+
+	public void setA(boolean a) {
+		this.a = a;
+	}
+
 	public String toString() {
-		return "[("+fil+","+col+")]";
+		if (this.a == false) {
+			return "[" + pos + "]";
+
+		}else {
+			return "[" + mirror + "]";
+
+		}
 	}
 }

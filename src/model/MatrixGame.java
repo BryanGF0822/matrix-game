@@ -1,6 +1,7 @@
 package model;
 
 public class MatrixGame {
+	
 	private Node first;
 	private int numRows;
 	private int numCols;
@@ -11,15 +12,18 @@ public class MatrixGame {
 		createMatrix();
 	}
 	
+	public Node getFirst() {
+		return first;
+	}
+
+
+
 	private void createMatrix() {
-		System.out.println("vamos a crear la matriz");
 		first = new Node(0,0);
-		System.out.println("se crea el first");
 		createRow(0,0,first);
 	}
 
 	private void createRow(int i, int j, Node currentFirstRow) {
-		System.out.println("en createRow con la fila "+i);
 		createCol(i,j,currentFirstRow,currentFirstRow.getUp());
 		if(i+1<numRows) {
 			Node downFirstRow = new Node(i+1,j);
@@ -31,7 +35,6 @@ public class MatrixGame {
 
 	private void createCol(int i, int j, Node prev, Node rowPrev) {
 		if(j<numCols) {
-			System.out.println("   en createCol con la columna "+j);
 			Node current = new Node(i, j+1);
 			current.setPrev(prev);
 			prev.setNext(current);
@@ -74,6 +77,32 @@ public class MatrixGame {
 		String msg = "";
 		
 		return msg;
+	}
+	
+	public void showMirror() {
+		
+		first.getDown().getNext().getNext().setA(true);
+		
+//		if (walkAroundMatrix(pos).checkMirror() == true) {
+//			walkAroundMatriz(pos).setA(true);
+//		}
+//		toString();
+//		first.setA(true);
+	}
+	
+	public Node walkAroundMatrix(int f, int c, Node tempo) {
+		
+		if (f == tempo.getFil()) {
+			if (c == tempo.getCol()) {
+				return tempo;
+			}else {
+				tempo = tempo.getNext();
+				return walkAroundMatrix(f, c, tempo);
+			}
+		}else {
+			tempo = tempo.getDown();
+			return walkAroundMatrix(f, c, tempo);
+		}
 	}
 	
 }

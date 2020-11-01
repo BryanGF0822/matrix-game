@@ -5,7 +5,10 @@ import model.*;
 public class Main {
 	
 	public static void main(String[] args) {
-		MatrixGame lm = new MatrixGame(3, 4);
-		System.out.println(lm);
+		MatrixGame matrix = new MatrixGame(3, 3);
+		System.out.println(matrix);
+		System.out.println(matrix);
+		Node a = matrix.walkAroundMatrix(2, 3, matrix.getFirst());
+		System.out.println(a.isA());
 	}
 }
