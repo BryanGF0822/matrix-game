@@ -13,7 +13,6 @@ public class Node {
 	private Node up;
 	private Node down;
 	
-	//private String espejo;
 
 	public Node(int f, int c) {
 		fil = f+1;
@@ -23,6 +22,8 @@ public class Node {
 		this.prev = null;
 		this.up = null;
 		this.down = null;
+		
+		this.mirror = "";
 		
 		a = false;
 		
@@ -88,6 +89,14 @@ public class Node {
 
 	public void setA(boolean a) {
 		this.a = a;
+	}
+
+	public String getMirror() {
+		return mirror;
+	}
+
+	public void setMirror(String mirror) {
+		this.mirror = mirror;
 	}
 
 	public String toString() {
