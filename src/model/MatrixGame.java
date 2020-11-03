@@ -282,10 +282,10 @@ public class MatrixGame {
 				Node temp1 = walkAroundMatrix(b,c,getFirst());
 				if(incli.equals("R")) {
 					//Llame metodo de validar espejo
-					mostrarEspejo(temp1,"/");
+					showMirror(temp1,"/");
 					
 				}else if(incli.equals("L")) {
-					mostrarEspejo(temp1, "\\");
+					showMirror(temp1, "\\");
 				}else {
 					msg = "No se reconoce si es R o L en el comando";
 				}
@@ -301,50 +301,50 @@ public class MatrixGame {
 			
 			if(walkAroundMatrix(row,col, getFirst()) != null ) {
 				if((comms.charAt(comms.length()-1) == 'H')) {
-					Cell temp = walkAroundMatrix(row,col,getFirst());
-					if(identificarEsquina(temp).equals("SI")) {
+					Node temp = walkAroundMatrix(row,col,getFirst());
+					if(isItA_Corner(temp).equals("SI")) {
 						temp.setStart(true);
-						contadora = contadora + 1;
-						lanzarRayo(row,col, "HD");
-						disparos = disparos +1;
-					}else if(identificarEsquina(temp).equals("SD")){
+						contador2 = contador2 + 1;
+						shootLaserRay(row,col, "HD");
+						shoots = shoots +1;
+					}else if(isItA_Corner(temp).equals("SD")){
 						temp.setStart(true);
-						contadora = contadora + 1;
-						lanzarRayo(row,col, "HI");
-						disparos = disparos +1;
-					}else if(identificarEsquina(temp).equals("II")) {
+						contador2 = contador2 + 1;
+						shootLaserRay(row,col, "HI");
+						shoots = shoots +1;
+					}else if(isItA_Corner(temp).equals("II")) {
 						temp.setStart(true);
-						contadora = contadora + 1;
-						lanzarRayo(row,col, "HD");
-						disparos = disparos +1;
-					}else if(identificarEsquina(temp).equals("ID")) {
+						contador2 = contador2 + 1;
+						shootLaserRay(row,col, "HD");
+						shoots = shoots +1;
+					}else if(isItA_Corner(temp).equals("ID")) {
 						temp.setStart(true);
-						contadora = contadora + 1;
-						lanzarRayo(row,col, "HI");
-						disparos = disparos +1;
+						contador2 = contador2 + 1;
+						shootLaserRay(row,col, "HI");
+						shoots = shoots +1;
 					}
 				}else if((comms.charAt(comms.length()-1) == 'V')){
 					Node temp = walkAroundMatrix(row,col,getFirst());
-					if(identificarEsquina(temp).equals("SI")) {
+					if(isItA_Corner(temp).equals("SI")) {
 						temp.setStart(true);
-						contadora = contadora + 1;
-						lanzarRayo(row,col, "VD");
-						disparos = disparos +1;
-					}else if(identificarEsquina(temp).equals("SD")){
+						contador2 = contador2 + 1;
+						shootLaserRay(row,col, "VD");
+						shoots = shoots +1;
+					}else if(isItA_Corner(temp).equals("SD")){
 						temp.setStart(true);
-						contadora = contadora + 1;
-						lanzarRayo(row,col, "VD");
-						disparos = disparos +1;
-					}else if(identificarEsquina(temp).equals("II")) {
+						contador2 = contador2 + 1;
+						shootLaserRay(row,col, "VD");
+						shoots = shoots +1;
+					}else if(isItA_Corner(temp).equals("II")) {
 						temp.setStart(true);
-						contadora = contadora + 1;
-						lanzarRayo(row,col, "VU");
-						disparos = disparos +1;
-					}else if(identificarEsquina(temp).equals("ID"))
+						contador2 = contador2 + 1;
+						shootLaserRay(row,col, "VU");
+						shoots = shoots +1;
+					}else if(isItA_Corner(temp).equals("ID"))
 						temp.setStart(true);
-						contadora = contadora + 1;
-						lanzarRayo(row,col, "VU");
-						disparos = disparos +1;
+						contador2 = contador2 + 1;
+						shootLaserRay(row,col, "VU");
+						shoots = shoots +1;
 				}else {
 					msg = "No se reconoce si es H o V en el comando";
 				}
@@ -359,12 +359,12 @@ public class MatrixGame {
 			if(walkAroundMatrix(b,c, getFirst()) != null ) {
 				//Llame método de lanzar rayo
 				toString();
-				disparos = disparos +1;
-				Cell temp = walkAroundMatrix(b,c,getFirst());
-				if(identificarEsquina1(temp) == true){
+				shoots = shoots +1;
+				Node temp = walkAroundMatrix(b,c,getFirst());
+				if(isItA_Corner1(temp) == true){
 					toString();
 				}else {
-					lanzarRayo(b,c, "");
+					shootLaserRay(b,c, "");
 				}
 				
 			}
@@ -374,242 +374,242 @@ public class MatrixGame {
 	}
 	
 	public void shootLaserRay(int row, char col, String orientation) {
-		Cell temp = recorrerMatrix(row, col,getFirst());
+		Node temp = walkAroundMatrix(row, col,getFirst());
 				// Orientation null
-			if(contadora == 0) { // Para prevenir que estemos en el inicio sea borde
-				if(temp.getRow() == 1) { // Borde Superior
-					if(temp.haveMirror() == true) {
+			if(contador2 == 0) { // Para prevenir que estemos en el inicio sea borde
+				if(temp.getFil() == 1) { // Borde Superior
+					if(temp.checkMirror() == true) {
 						if(temp.getMirror().equals("/")) {
-							if(recorrerMatrix(temp.getRow(), (char)(temp.getCol()-1), getFirst()) != null) {
-								contadora = contadora + 1;
-								lanzarRayo(temp.getRow(), (char)(temp.getCol()-1), "HI");
+							if(walkAroundMatrix(temp.getFil(), (char)(temp.getCol()-1), getFirst()) != null) {
+								contador2 = contador2 + 1;
+								shootLaserRay(temp.getFil(), (char)(temp.getCol()-1), "HI");
 								temp.setStart(true);
 							}
 						}else {
-							if(recorrerMatrix(temp.getRow(), (char)(temp.getCol()+1), getFirst()) != null) {
-								contadora = contadora + 1;
-								lanzarRayo(temp.getRow(), (char)(temp.getCol()+1), "HD");
+							if(walkAroundMatrix(temp.getFil(), (char)(temp.getCol()+1), getFirst()) != null) {
+								contador2 = contador2 + 1;
+								shootLaserRay(temp.getFil(), (char)(temp.getCol()+1), "HD");
 								temp.setStart(true);
 							}
 						}
 					}else {
 						//Borde superior
-						contadora = contadora + 1;
-						if(recorrerMatrix(temp.getRow()+1, temp.getCol(), getFirst()) != null) {
-							lanzarRayo(temp.getRow()+1, temp.getCol(), "VD");
+						contador2 = contador2 + 1;
+						if(walkAroundMatrix(temp.getFil()+1, temp.getCol(), getFirst()) != null) {
+							shootLaserRay(temp.getFil()+1, temp.getCol(), "VD");
 							temp.setStart(true);
 						}
 					}
 					
-				}else if (temp.getRow() == getRows()){   // borde inferior 
-					if(temp.haveMirror() == true) {
+				}else if (temp.getFil() == getNumRows()){   // borde inferior 
+					if(temp.checkMirror() == true) {
 						if(temp.getMirror().equals("/")) {
-							if(recorrerMatrix(temp.getRow(), (char)(temp.getCol()+1), getFirst()) != null) {
-								contadora = contadora + 1;
-								lanzarRayo(temp.getRow(), (char)(temp.getCol()+1), "HD");
+							if(walkAroundMatrix(temp.getFil(), (char)(temp.getCol()+1), getFirst()) != null) {
+								contador2 = contador2 + 1;
+								shootLaserRay(temp.getFil(), (char)(temp.getCol()+1), "HD");
 								temp.setStart(true);
 							}
 						}else {
-							if(recorrerMatrix(temp.getRow(), (char)(temp.getCol()-1), getFirst()) != null) {
-								contadora = contadora + 1;
-								lanzarRayo(temp.getRow(), (char)(temp.getCol()-1), "HI");
+							if(walkAroundMatrix(temp.getFil(), (char)(temp.getCol()-1), getFirst()) != null) {
+								contador2 = contador2 + 1;
+								shootLaserRay(temp.getFil(), (char)(temp.getCol()-1), "HI");
 								temp.setStart(true);
 							}
 						}
 					}else {
 						//Borde inferior
-						contadora = contadora + 1;
-						if(recorrerMatrix(temp.getRow()-1, temp.getCol(), getFirst()) != null) {
-							lanzarRayo(temp.getRow()-1, temp.getCol(), "VU");
+						contador2 = contador2 + 1;
+						if(walkAroundMatrix(temp.getFil()-1, temp.getCol(), getFirst()) != null) {
+							shootLaserRay(temp.getFil()-1, temp.getCol(), "VU");
 							temp.setStart(true);
 						}
 					}
 				}else if (temp.getCol() == 'A') { //Borde izquierdo
-					if(temp.haveMirror() == true) {
+					if(temp.checkMirror() == true) {
 						if(temp.getMirror().equals("/")) {
-							if(recorrerMatrix(temp.getRow()-1, temp.getCol(), getFirst()) != null) {
-								contadora = contadora + 1;
-								lanzarRayo(temp.getRow()-1, temp.getCol(), "VU");
+							if(walkAroundMatrix(temp.getFil()-1, temp.getCol(), getFirst()) != null) {
+								contador2 = contador2 + 1;
+								shootLaserRay(temp.getFil()-1, temp.getCol(), "VU");
 								temp.setStart(true);
 							}
 						}else {
-							if(recorrerMatrix(temp.getRow()+1, temp.getCol(), getFirst()) != null) {
-								contadora = contadora + 1;
-								lanzarRayo(temp.getRow()+1, temp.getCol(), "VD");
+							if(walkAroundMatrix(temp.getFil()+1, temp.getCol(), getFirst()) != null) {
+								contador2 = contador2 + 1;
+								shootLaserRay(temp.getFil()+1, temp.getCol(), "VD");
 								temp.setStart(true);
 							}
 						}
 					}else {
 						//Borde izquierdo
-						contadora = contadora + 1;
-						if(recorrerMatrix(temp.getRow(), (char) (temp.getCol()+1), getFirst()) != null) {
-							lanzarRayo(temp.getRow(), (char) (temp.getCol()+1), "HD");
+						contador2 = contador2 + 1;
+						if(walkAroundMatrix(temp.getFil(), (char) (temp.getCol()+1), getFirst()) != null) {
+							shootLaserRay(temp.getFil(), (char) (temp.getCol()+1), "HD");
 							temp.setStart(true);
 						}
 					}
 					
-				}else if (temp.getCol() == 'A' + (getCols()-1)) { //Borde derecho
-					if(temp.haveMirror() == true) {
+				}else if (temp.getCol() == 'A' + (getNumCols()-1)) { //Borde derecho
+					if(temp.checkMirror() == true) {
 						if(temp.getMirror().equals("/")) {
-							if(recorrerMatrix(temp.getRow()+1, temp.getCol(), getFirst()) != null) {
-								contadora = contadora + 1;
-								lanzarRayo(temp.getRow()+1, temp.getCol(), "VD");
+							if(walkAroundMatrix(temp.getFil()+1, temp.getCol(), getFirst()) != null) {
+								contador2 = contador2 + 1;
+								shootLaserRay(temp.getFil()+1, temp.getCol(), "VD");
 								temp.setStart(true);
 							}
 						}else {
-							if(recorrerMatrix(temp.getRow()-1, temp.getCol(), getFirst()) != null) {
-								contadora = contadora + 1;
-								lanzarRayo(temp.getRow()-1, temp.getCol(), "VU");
+							if(walkAroundMatrix(temp.getFil()-1, temp.getCol(), getFirst()) != null) {
+								contador2 = contador2 + 1;
+								shootLaserRay(temp.getFil()-1, temp.getCol(), "VU");
 								temp.setStart(true);
 							}
 						}
 					}else {
 						//Borde derecho
-						contadora = contadora + 1;
-						if(recorrerMatrix(temp.getRow(), (char)(temp.getCol()-1), getFirst()) != null) {
-							lanzarRayo(temp.getRow(), (char)(temp.getCol()-1), "HI");
+						contador2 = contador2 + 1;
+						if(walkAroundMatrix(temp.getFil(), (char)(temp.getCol()-1), getFirst()) != null) {
+							shootLaserRay(temp.getFil(), (char)(temp.getCol()-1), "HI");
 							temp.setStart(true);
 						}
 					}
 				}
 			}else { //contadora == 1
 				if(orientation == "HD") {
-					if(temp.haveMirror() == true) {
+					if(temp.checkMirror() == true) {
 						if(temp.getMirror().equals("/")) {
-							if(recorrerMatrix(temp.getRow()-1, temp.getCol(), getFirst()) != null) {
-								Cell temp1 = recorrerMatrix(temp.getRow()-1, temp.getCol(), getFirst());
-								lanzarRayo(temp1.getRow(), temp1.getCol(), "VU");
+							if(walkAroundMatrix(temp.getFil()-1, temp.getCol(), getFirst()) != null) {
+								Node temp1 = walkAroundMatrix(temp.getFil()-1, temp.getCol(), getFirst());
+								shootLaserRay(temp1.getFil(), temp1.getCol(), "VU");
 							}else {
-								temp.setStop(true);
-								setContadora(0);
+								temp.setEnd(true);
+								setContador2(0);
 								
 							}
 						}else {
-							if(recorrerMatrix(temp.getRow()+1, temp.getCol(), getFirst()) != null) {
-								Cell temp1 = recorrerMatrix(temp.getRow()+1, temp.getCol(), getFirst());
-								lanzarRayo(temp1.getRow(), temp1.getCol(), "VD");
+							if(walkAroundMatrix(temp.getFil()+1, temp.getCol(), getFirst()) != null) {
+								Node temp1 = walkAroundMatrix(temp.getFil()+1, temp.getCol(), getFirst());
+								shootLaserRay(temp1.getFil(), temp1.getCol(), "VD");
 							}else {
 
-								temp.setStop(true);
-								setContadora(0);
+								temp.setEnd(true);
+								setContador2(0);
 								
 								
 							}
 						}
 					}else {
-						if(recorrerMatrix(temp.getRow(), (char) (temp.getCol()+1), getFirst()) != null) {
-							Cell temp1 = recorrerMatrix(temp.getRow(), (char)(temp.getCol()+1), getFirst());
-							lanzarRayo(temp1.getRow(), temp1.getCol(), "HD");
+						if(walkAroundMatrix(temp.getFil(), (char) (temp.getCol()+1), getFirst()) != null) {
+							Node temp1 = walkAroundMatrix(temp.getFil(), (char)(temp.getCol()+1), getFirst());
+							shootLaserRay(temp1.getFil(), temp1.getCol(), "HD");
 						}else {
 
-							temp.setStop(true);
-							setContadora(0);
+							temp.setEnd(true);
+							setContador2(0);
 							
 							
 						}	
 					}
 				}else if(orientation == "HI") {
-					if(temp.haveMirror() == true) {
+					if(temp.checkMirror() == true) {
 						if(temp.getMirror().equals("/")) {
-							if(recorrerMatrix(temp.getRow()+1, temp.getCol(), getFirst()) != null) {
-								Cell temp1 = recorrerMatrix(temp.getRow()+1, temp.getCol(), getFirst());
-								lanzarRayo(temp1.getRow(), temp1.getCol(), "VD");
+							if(walkAroundMatrix(temp.getFil()+1, temp.getCol(), getFirst()) != null) {
+								Node temp1 = walkAroundMatrix(temp.getFil()+1, temp.getCol(), getFirst());
+								shootLaserRay(temp1.getFil(), temp1.getCol(), "VD");
 							}else {
 
-								temp.setStop(true);
-								setContadora(0);
+								temp.setEnd(true);
+								setContador2(0);
 								
 								
 							}
 						}else {
-							if(recorrerMatrix(temp.getRow()-1, temp.getCol(), getFirst()) != null) {
-								Cell temp1 = recorrerMatrix(temp.getRow()-1, temp.getCol(), getFirst());
-								lanzarRayo(temp1.getRow(), temp1.getCol(), "VU");
+							if(walkAroundMatrix(temp.getFil()-1, temp.getCol(), getFirst()) != null) {
+								Node temp1 = walkAroundMatrix(temp.getFil()-1, temp.getCol(), getFirst());
+								shootLaserRay(temp1.getFil(), temp1.getCol(), "VU");
 							}else {
-								temp.setStop(true);
-								setContadora(0);
+								temp.setEnd(true);
+								setContador2(0);
 								
 								
 							}
 						}
 					}else {
-						if(recorrerMatrix(temp.getRow(), (char) (temp.getCol()-1), getFirst()) != null) {
-							Cell temp1 = recorrerMatrix(temp.getRow(), (char) (temp.getCol()-1), getFirst());
-							lanzarRayo(temp1.getRow(), temp1.getCol(), "HI");
+						if(walkAroundMatrix(temp.getFil(), (char) (temp.getCol()-1), getFirst()) != null) {
+							Node temp1 = walkAroundMatrix(temp.getFil(), (char) (temp.getCol()-1), getFirst());
+							shootLaserRay(temp1.getFil(), temp1.getCol(), "HI");
 						}else {
 
-							temp.setStop(true);
-							setContadora(0);
+							temp.setEnd(true);
+							setContador2(0);
 							
 							
 						}	
 					}
 				}else if(orientation == "VU") {
-					if(temp.haveMirror() == true) {
+					if(temp.checkMirror() == true) {
 						if(temp.getMirror().equals("/")) {
-							if(recorrerMatrix(temp.getRow(), (char) (temp.getCol()+1), getFirst()) != null) {
-								Cell temp1 = recorrerMatrix(temp.getRow(), (char) (temp.getCol()+1), getFirst());
-								lanzarRayo(temp1.getRow(), temp1.getCol(), "HD");
+							if(walkAroundMatrix(temp.getFil(), (char) (temp.getCol()+1), getFirst()) != null) {
+								Node temp1 = walkAroundMatrix(temp.getFil(), (char) (temp.getCol()+1), getFirst());
+								shootLaserRay(temp1.getFil(), temp1.getCol(), "HD");
 							}else {
 
-								temp.setStop(true);
-								setContadora(0);
+								temp.setEnd(true);
+								setContador2(0);
 								
 								
 							}
 						}else {
-							if(recorrerMatrix(temp.getRow(), (char) (temp.getCol()-1), getFirst()) != null) {
-								Cell temp1 = recorrerMatrix(temp.getRow(), (char) (temp.getCol()-1), getFirst());
-								lanzarRayo(temp1.getRow(), temp1.getCol(), "HI");
+							if(walkAroundMatrix(temp.getFil(), (char) (temp.getCol()-1), getFirst()) != null) {
+								Node temp1 = walkAroundMatrix(temp.getFil(), (char) (temp.getCol()-1), getFirst());
+								shootLaserRay(temp1.getFil(), temp1.getCol(), "HI");
 							}else {
 
-								temp.setStop(true);
-								setContadora(0);
+								temp.setEnd(true);
+								setContador2(0);
 								
 								
 							}
 						}
 					}else {
-						if(recorrerMatrix(temp.getRow()-1, temp.getCol(), getFirst()) != null) {
-							Cell temp1 = recorrerMatrix(temp.getRow()-1, temp.getCol(), getFirst());
-							lanzarRayo(temp1.getRow(), temp1.getCol(), "VU");
+						if(walkAroundMatrix(temp.getFil()-1, temp.getCol(), getFirst()) != null) {
+							Node temp1 = walkAroundMatrix(temp.getFil()-1, temp.getCol(), getFirst());
+							shootLaserRay(temp1.getFil(), temp1.getCol(), "VU");
 						}else {
-							temp.setStop(true);
-							setContadora(0);
+							temp.setEnd(true);
+							setContador2(0);
 							
 							
 						}	
 					}
 				}else if(orientation == "VD") {
-					if(temp.haveMirror() == true) {
+					if(temp.checkMirror() == true) {
 						if(temp.getMirror().equals("/")) {
-							if(recorrerMatrix(temp.getRow(), (char) (temp.getCol()-1), getFirst()) != null) {
-								Cell temp1 = recorrerMatrix(temp.getRow(), (char) (temp.getCol()-1), getFirst());
-								lanzarRayo(temp1.getRow(), temp1.getCol(), "HI");
+							if(walkAroundMatrix(temp.getFil(), (char) (temp.getCol()-1), getFirst()) != null) {
+								Node temp1 = walkAroundMatrix(temp.getFil(), (char) (temp.getCol()-1), getFirst());
+								shootLaserRay(temp1.getFil(), temp1.getCol(), "HI");
 							}else {
-								temp.setStop(true);
-								setContadora(0);
+								temp.setEnd(true);
+								setContador2(0);
 								
 								
 							}
 						}else {
-							if(recorrerMatrix(temp.getRow(), (char) (temp.getCol()+1), getFirst()) != null) {
-								Cell temp1 = recorrerMatrix(temp.getRow(), (char) (temp.getCol()+1), getFirst());
-								lanzarRayo(temp1.getRow(), temp1.getCol(), "HD");
+							if(walkAroundMatrix(temp.getFil(), (char) (temp.getCol()+1), getFirst()) != null) {
+								Node temp1 = walkAroundMatrix(temp.getFil(), (char) (temp.getCol()+1), getFirst());
+								shootLaserRay(temp1.getFil(), temp1.getCol(), "HD");
 							}else {
-								setContadora(0);
-								temp.setStop(true);
+								setContador2(0);
+								temp.setEnd(true);
 								
 								
 							}
 						}
 					}else {
-						if(recorrerMatrix(temp.getRow()+1, temp.getCol(), getFirst()) != null) {
-							Cell temp1 = recorrerMatrix(temp.getRow()+1, temp.getCol(), getFirst());
-							lanzarRayo(temp1.getRow(), temp1.getCol(), "VD");
+						if(walkAroundMatrix(temp.getFil()+1, temp.getCol(), getFirst()) != null) {
+							Node temp1 = walkAroundMatrix(temp.getFil()+1, temp.getCol(), getFirst());
+							shootLaserRay(temp1.getFil(), temp1.getCol(), "VD");
 						}else {
-							setContadora(0);
-							temp.setStop(true);
+							setContador2(0);
+							temp.setEnd(true);
 							
 							
 						}	
@@ -617,6 +617,50 @@ public class MatrixGame {
 				}
 			} //contadora 
 					
+	}
+	
+	public String isItA_Corner(Node temp) {
+		if((walkAroundMatrix(temp.getFil()-1, temp.getCol(), getFirst()) == null) && (walkAroundMatrix(temp.getFil(), (char)(temp.getCol()-1), getFirst()) ==null)) { //Get up == null, get prev == null
+			return "SI";
+			//Esquina superior izquierda
+		}else if((walkAroundMatrix(temp.getFil()-1, temp.getCol(), getFirst()) == null) && (walkAroundMatrix(temp.getFil(), (char)(temp.getCol()+1), getFirst()) ==null)){
+			return "SD";
+			//Esquina superior derecha
+		}else if((walkAroundMatrix(temp.getFil(), (char) (temp.getCol()-1), getFirst()) == null) && (walkAroundMatrix(temp.getFil()+1, temp.getCol(), getFirst()) ==null)) {
+			System.out.println((walkAroundMatrix(temp.getFil(), (char) (temp.getCol()-1), getFirst())));
+			System.out.println((walkAroundMatrix(temp.getFil()+1, temp.getCol(), getFirst())));
+			return "II";
+			//Esquina inferior izquierda
+		}else if((walkAroundMatrix(temp.getFil()+1, temp.getCol(), getFirst()) == null) && (walkAroundMatrix(temp.getFil(), (char)(temp.getCol()+1), getFirst()) ==null)) {
+			System.out.println((walkAroundMatrix(temp.getFil()+1, temp.getCol(), getFirst())));
+			System.out.println((walkAroundMatrix(temp.getFil()+1, (char) (temp.getCol()+1), getFirst())));
+			return "ID";
+			//Esquina inferior derecha4
+			
+		}else {
+			return "No se identifica la esquina";
+		}
+	
+	}
+	
+	public boolean isItA_Corner1(Node temp) {
+		if((walkAroundMatrix(temp.getFil()-1, temp.getCol(), getFirst()) == null) && (walkAroundMatrix(temp.getFil(), (char)(temp.getCol()-1), getFirst()) ==null)) { //Get up == null, get prev == null
+			return true;
+			//Esquina superior izquierda
+		}else if((walkAroundMatrix(temp.getFil()-1, temp.getCol(), getFirst()) == null) && (walkAroundMatrix(temp.getFil(), (char)(temp.getCol()+1), getFirst()) ==null)){
+			return true;
+			//Esquina superior derecha
+		}else if((walkAroundMatrix(temp.getFil()+1, temp.getCol(), getFirst()) == null) && (walkAroundMatrix(temp.getFil(), (char)(temp.getCol()-1), getFirst()) ==null)) {
+			return true;
+			//Esquina inferior izquierda
+		}else if((walkAroundMatrix(temp.getFil()+1, temp.getCol(), getFirst()) == null) && (walkAroundMatrix(temp.getFil(), (char)(temp.getCol()+1), getFirst()) ==null)) {
+			return true;
+			//Esquina inferior derecha4
+			
+		}else {
+			return false;
+		}
+	
 	}
 	
 }
