@@ -1,6 +1,6 @@
 package model;
 
-public class MatrixGame {
+public class Matrix {
 	
 	private Node first;
 	private Player player;
@@ -15,7 +15,7 @@ public class MatrixGame {
 	
 	
 	
-	public MatrixGame(String name, int numRows, int numCols, int mirror) {
+	public Matrix(String name, int numRows, int numCols, int mirror) {
 		this.numRows = numRows;
 		this.numCols = numCols;
 		this.contador1 = 0;
@@ -111,7 +111,7 @@ public class MatrixGame {
 		player.setScore(d);
 	}
 	
-	public Player sendDates() {
+	public Player sendData() {
 		return player;
 	}
 	
@@ -148,32 +148,64 @@ public class MatrixGame {
 	}
 	
 	public String toString() {
-		String msg;
-		msg = toStringRow(first);
+		String msg = "";
+		msg = rowsString(first);
+		
 		return msg;
 	}
-
-	private String toStringRow(Node firstRow) {
+	
+	public String toString(boolean a) {
 		String msg = "";
-		if(firstRow!=null) {
-			msg = toStringCol(firstRow) + "\n";
-			msg += toStringRow(firstRow.getDown());
+		msg = rowsString2(first);
+		
+		return msg;
+	}
+	
+	public String rowsString(Node firstRow) {
+		String msg = "";
+		if(firstRow != null) {
+			msg = colsString(firstRow) + "\n";
+			msg += rowsString(firstRow.getDown());
 		}
+		
 		return msg;
 	}
-
-	private String toStringCol(Node current) {
+	
+	public String colsString(Node current) {
 		String msg = "";
-		if(current!=null) {
+		if(current != null) {
 			msg = current.toString();
-			msg += toStringCol(current.getNext());
+			current.setStart(false);
+			current.setEnd(false);
+			current.setEnd(false);
+			msg += colsString(current.getNext());
 		}
 		return msg;
 	}
 	
-	public String toString2() {
+	public String showAll() {
 		String msg = "";
+		msg = rowsString2(first);
 		
+		return msg;
+	}
+	
+	public String rowsString2(Node firstRow) {
+		String msg = "";
+		if(firstRow != null) {
+			msg = colsString2(firstRow) + "\n";
+			msg += rowsString2(firstRow.getDown());
+		}
+		
+		return msg;
+	}
+	
+	public String colsString2(Node current) {
+		String msg = "";
+		if(current != null) {
+			msg = current.toString(true);
+			msg += colsString2(current.getNext());
+		}
 		return msg;
 	}
 	
@@ -230,6 +262,7 @@ public class MatrixGame {
 	}
 	
 	public void generateMirror(int f, int c, int k) { // a = 3; b = 3; mirror = 4; mirror > 9
+		@SuppressWarnings("unused")
 		String mg = "";
 		System.out.println(k);
 		if(contador1 <= f * c) {     
@@ -373,7 +406,7 @@ public class MatrixGame {
 		return msg;
 	}
 	
-	public void shootLaserRay(int row, char col, String orientation) {
+	public void shootLaserRay(int row, int col, String orientation) {
 		Node temp = walkAroundMatrix(row, col,getFirst());
 				// Orientation null
 			if(contador2 == 0) { // Para prevenir que estemos en el inicio sea borde
