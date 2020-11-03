@@ -26,6 +26,7 @@ public class Matrix {
 		player = new Player(name, 0);
 		
 		createMatrix();
+		reStartMirror(mirror, numRows, numCols);
 	}
 	
 	public Node getFirst() {
@@ -123,7 +124,7 @@ public class Matrix {
 	private void createRow(int i, int j, Node currentFirstRow) {
 		createCol(i,j,currentFirstRow,currentFirstRow.getUp());
 		if(i+1<numRows) {
-			Node downFirstRow = new Node(i+1,j);
+			Node downFirstRow = new Node(i,j);
 			downFirstRow.setUp(currentFirstRow);
 			currentFirstRow.setDown(downFirstRow);
 			createRow(i+1,j,downFirstRow);
@@ -133,7 +134,7 @@ public class Matrix {
 	
 	private void createCol(int i, int j, Node prev, Node rowPrev) {
 		if(j+1<numCols) {
-			Node current = new Node(i, j+1);
+			Node current = new Node(i+1, j+1);
 			current.setPrev(prev);
 			prev.setNext(current);
 			
