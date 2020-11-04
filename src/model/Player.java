@@ -58,5 +58,8 @@ public class Player {
 		this.sonRight = sonRight;
 	}
 	
+	public String toString() {
+		return nickName;
+	}
 	
 }

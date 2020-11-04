@@ -176,7 +176,8 @@ public class Matrix {
 		if(current != null) {
 			current.setStart(false);
 			current.setEnd(false);
-			current.setB(true);
+			current.setEnd(false);
+			//current.setB(true);
 			msg = current.toString();
 			
 			msg += colsString(current.getNext());
@@ -273,23 +274,24 @@ public class Matrix {
 			}else {
 				Node temp = generateRandomPosition(f,c);  //1A ; 1A
 				
-				System.out.println(temp);
-				System.out.println(temp.getMirror());
+				//System.out.println(temp);
+				//System.out.println(temp.getMirror());
 				
  				if(temp.getMirror() == "") {    //1A = ""; 1A = "/" O 1A = "\\";  
- 					System.out.println("true");
+ 					//System.out.println("true");
 					temp.setMirror(createRandomMirror());
-					System.out.println(temp.getMirror());
+					//System.out.println(temp.getMirror());
 				}else {
-					System.out.println("Hay una position que ya tiene");
+					//System.out.println("Hay una position que ya tiene");
 					generateMirror(f,c,contador1);
 				}
-				System.out.println("Siguiente espejo");
+				//System.out.println("Siguiente espejo");
 				contador1  = contador1 - 1;
 				generateMirror(f,c,contador1);
 			}
 		}else {
-			//mg = "No se puede generar los espejos porque la cantidad supera las dimensiones de la matriz";
+			@SuppressWarnings("unused")
+			String mg = "No se puede generar los espejos porque la cantidad supera las dimensiones de la matriz";
 		}
 		
 	}

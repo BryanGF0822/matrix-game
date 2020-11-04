@@ -32,7 +32,7 @@ public class Node {
 		this.b = false;
 		
 		char letter = (char)(64 + this.col);
-		this.pos = this.fil + " " + letter;
+		this.pos = this.fil + "" + letter;
 	}
 	
 	public boolean checkMirror() {

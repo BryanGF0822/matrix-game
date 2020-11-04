@@ -25,9 +25,9 @@ public class Menu {
 		System.out.println();
 		System.out.println("Select one option please.");
 		System.out.println();
-		System.out.println("1. Play game");
-		System.out.println("2. Score´s top");
-		System.out.println("3. Exit the game");
+		System.out.println("1. Play.");
+		System.out.println("2. Best score.");
+		System.out.println("3. Exit.");
 		
 		int option = Integer.parseInt(sc.nextLine());
 		
@@ -68,14 +68,14 @@ public class Menu {
 			control.receiveData();
 			startMenu();
 		}else {
-			System.out.println(control.getGame().toString());
+			System.out.println(control.getGame().toString(true));
 			System.out.println("Type command: ");
 			System.out.println("Mirrors: " + control.getGame().getConMirror());
 			control.getGame().calculateScore();
 			System.out.println(control.getGame().getPlayer().getNickName() + " " + control.getGame().getPlayer().getScore());
 			String comms = sc.nextLine();
 			control.getGame().identificarComms(comms);
-			//System.out.println(control.getGame());
+			System.out.println(control.getGame());
 			lectura();
 		}
 	}
