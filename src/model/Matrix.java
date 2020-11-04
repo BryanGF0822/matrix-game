@@ -26,7 +26,7 @@ public class Matrix {
 		player = new Player(name, 0);
 		
 		createMatrix();
-		reStartMirror(mirror, numRows, numCols);
+		reStartMirror(numRows, numCols, mirror);
 	}
 	
 	public Node getFirst() {
@@ -117,14 +117,14 @@ public class Matrix {
 	}
 	
 	private void createMatrix() {
-		first = new Node(0,0);
-		createRow(0,0,first);
+		first = new Node(0,1);
+		createRow(0,1,first);
 	}
 
 	private void createRow(int i, int j, Node currentFirstRow) {
-		createCol(i,j,currentFirstRow,currentFirstRow.getUp());
+		createCol(i,j,currentFirstRow);
 		if(i+1<numRows) {
-			Node downFirstRow = new Node(i,j);
+			Node downFirstRow = new Node(i+1,j);
 			downFirstRow.setUp(currentFirstRow);
 			currentFirstRow.setDown(downFirstRow);
 			createRow(i+1,j,downFirstRow);
@@ -132,19 +132,18 @@ public class Matrix {
 	}
 
 	
-	private void createCol(int i, int j, Node prev, Node rowPrev) {
-		if(j+1<numCols) {
-			Node current = new Node(i+1, j+1);
+	private void createCol(int i, int j, Node prev) {
+		if(j<numCols) {
+			Node current = new Node(i,j+1);
 			current.setPrev(prev);
 			prev.setNext(current);
+			createCol(i,j+1, current);
 			
-			if(rowPrev!=null) {
+			/*if(rowPrev!=null) {
 				rowPrev = rowPrev.getNext();
 				current.setUp(rowPrev);
 				rowPrev.setDown(current);
-			}
-			
-			createCol(i,j+1,current,rowPrev);
+			}*/
 		}
 	}
 	
@@ -175,10 +174,11 @@ public class Matrix {
 	public String colsString(Node current) {
 		String msg = "";
 		if(current != null) {
-			msg = current.toString();
 			current.setStart(false);
 			current.setEnd(false);
-			current.setEnd(false);
+			current.setB(true);
+			msg = current.toString();
+			
 			msg += colsString(current.getNext());
 		}
 		return msg;
@@ -224,7 +224,7 @@ public class Matrix {
 			
 	}
 	
-	public void reStartMirror(int mirror, int f, int c) {
+	public void reStartMirror(int f, int c, int mirror) {
 		
 		setConMirror(mirror);
 		setMirror(mirror);
@@ -233,18 +233,22 @@ public class Matrix {
 	}
 	
 	public Node walkAroundMatrix(int f, int c, Node tempo) {
-		
-		if (f == tempo.getFil()) {
-			if (c == tempo.getCol()) {
-				return tempo;
+		try {
+			if (f == tempo.getFil()) {
+				if (c == tempo.getCol()) {
+					return tempo;
+				}else {
+					tempo = tempo.getNext();
+					return walkAroundMatrix(f, c, tempo);
+				}
 			}else {
-				tempo = tempo.getNext();
+				tempo = tempo.getDown();
 				return walkAroundMatrix(f, c, tempo);
 			}
-		}else {
-			tempo = tempo.getDown();
-			return walkAroundMatrix(f, c, tempo);
+		}catch (NullPointerException a) {
+			return null;
 		}
+		
 	}
 	
 	public String createRandomMirror() {
@@ -263,8 +267,6 @@ public class Matrix {
 	}
 	
 	public void generateMirror(int f, int c, int k) { // a = 3; b = 3; mirror = 4; mirror > 9
-		@SuppressWarnings("unused")
-		String mg = "";
 		System.out.println(k);
 		if(contador1 <= f * c) {     
 			if(contador1 <= 0) {
@@ -287,15 +289,15 @@ public class Matrix {
 				generateMirror(f,c,contador1);
 			}
 		}else {
-			mg = "No se puede generar los espejos porque la cantidad supera las dimensiones de la matriz";
+			//mg = "No se puede generar los espejos porque la cantidad supera las dimensiones de la matriz";
 		}
 		
 	}
 	
 	public Node generateRandomPosition(int f, int c) {
 		
-		double a1 = Math.random() * f+1;
-		double b1 = Math.random() * c;
+		double a1 = (Math.random() *f)+1;
+		double b1 = Math.random() * c+1;
 		
 		int fil = (int)a1;
 		int col = (int)b1;
@@ -388,7 +390,8 @@ public class Matrix {
 		}else {
 			String a = comms.charAt(0) + "";
 			int b = Integer.parseInt(a);
-			char c = comms.charAt(1);
+			int t = comms.charAt(1);
+			int c = t - 64;
 			
 			if(walkAroundMatrix(b,c, getFirst()) != null ) {
 				//Llame método de lanzar rayo

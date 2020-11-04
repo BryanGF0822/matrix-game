@@ -68,14 +68,14 @@ public class Menu {
 			control.receiveData();
 			startMenu();
 		}else {
-			System.out.println(control.getGame().toString(true));
+			System.out.println(control.getGame().toString());
 			System.out.println("Type command: ");
 			System.out.println("Mirrors: " + control.getGame().getConMirror());
 			control.getGame().calculateScore();
 			System.out.println(control.getGame().getPlayer().getNickName() + " " + control.getGame().getPlayer().getScore());
 			String comms = sc.nextLine();
 			control.getGame().identificarComms(comms);
-			System.out.println(control.getGame());
+			//System.out.println(control.getGame());
 			lectura();
 		}
 	}

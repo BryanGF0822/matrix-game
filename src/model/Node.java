@@ -31,8 +31,8 @@ public class Node {
 		this.a = false;
 		this.b = false;
 		
-		char letter = (char)('A' + col);
-		this.pos = fil + "" + letter;
+		char letter = (char)(64 + this.col);
+		this.pos = this.fil + " " + letter;
 	}
 	
 	public boolean checkMirror() {
@@ -128,10 +128,10 @@ public class Node {
 	}
 
 	public String toString(){
-		if(b == true) {
+		if(a == true) {
 			return "[(" + "X" + ")]";
 		}else if(b == true) {
-			return "[(" +  mirror  + ")]";
+			return "[( " +  mirror  + " )]";
 		}else if(start == true) {
 			return "[(" +  "S"  + ")]";
 		}else if(end == true) {
