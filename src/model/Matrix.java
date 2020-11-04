@@ -26,7 +26,7 @@ public class Matrix {
 		player = new Player(name, 0);
 		
 		createMatrix();
-		reStartMirror(numRows, numCols, mirror);
+		reStartMirror(mirror, numRows, numCols);
 	}
 	
 	public Node getFirst() {
@@ -225,7 +225,7 @@ public class Matrix {
 			
 	}
 	
-	public void reStartMirror(int f, int c, int mirror) {
+	public void reStartMirror(int mirror, int f, int c) {
 		
 		setConMirror(mirror);
 		setMirror(mirror);
@@ -268,7 +268,7 @@ public class Matrix {
 	}
 	
 	public void generateMirror(int f, int c, int k) { // a = 3; b = 3; mirror = 4; mirror > 9
-		System.out.println(k);
+		//System.out.println(k);
 		if(contador1 <= f * c) {     
 			if(contador1 <= 0) {
 			}else {
