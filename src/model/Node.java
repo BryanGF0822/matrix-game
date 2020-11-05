@@ -35,6 +35,10 @@ public class Node {
 		this.pos = this.fil + "" + letter;
 	}
 	
+	/**
+	 * Allows you to check whether or not there is a mirror in a cell.
+	 * @return [returns a buleano as false or true to know whether or not there is a mirror.]
+	 */
 	public boolean checkMirror() {
 		if (mirror == "") {
 			return false;
@@ -127,6 +131,10 @@ public class Node {
 		this.mirror = mirror;
 	}
 
+	/**
+	 * It allows to show in the matrix with the mirrors in case they are found,
+	 * also to visualize where the laser beam enters and exits and the positions of the matrix.
+	 */
 	public String toString(){
 		if(a == true) {
 			return "[(" + "X" + ")]";
@@ -143,7 +151,12 @@ public class Node {
 		
 	}
 	
-	public String toString(boolean a) {
+	/**
+	 * Allows to show the positions of the matrix.
+	 * @param [Flase or true para mostrar las posiciones.]
+	 * @return [returns the matrix with the positions of each cell.]
+	 */
+	public String toString(boolean c) {
 		return "[(" + pos + ")]";
 	}
 }
