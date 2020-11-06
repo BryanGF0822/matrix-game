@@ -37,7 +37,7 @@ public class Node {
 	
 	/**
 	 * Allows you to check whether or not there is a mirror in a cell.
-	 * @return [returns a buleano as false or true to know whether or not there is a mirror.]
+	 * @return [returns a boolean as false or true to know whether or not there is a mirror.]
 	 */
 	public boolean checkMirror() {
 		if (mirror == "") {
