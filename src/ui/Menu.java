@@ -1,29 +1,35 @@
 package ui;
+
 import java.util.Scanner;
 
-import model.*;
+import model.MirrorsGame;
 
 public class Menu {
-	private Control control;
-	private Scanner entrie1;
-	private Scanner entrie2;
+	
+	private MirrorsGame control;
+	private Scanner sc;
+	
 	
 	public Menu() {
-		entrie1 = new Scanner(System.in);
-		entrie2 = new Scanner(System.in);
-		this.control = new Control();
+		sc = new Scanner(System.in);
+		this.control = new MirrorsGame();
 	}
 	
 	public void startMenu() {
-		System.out.println("===================================");
-		System.out.println("   WELCOME TO THE MIRRORS GAME");
-		System.out.println("===================================");
-		System.out.println("Please, select the option that you would like to do");
-		System.out.println("1. Play ");
-		System.out.println("2. Best Scores");
-		System.out.println("3. Exit");
 		
-		int option = entrie2.nextInt();
+		System.out.println("==========================================================");
+		System.out.println("                WELCOME TO MIRRORS GAME");
+		System.out.println("==========================================================");
+		System.out.println("      A game that measures your reasoning ability.");
+		System.out.println("==========================================================");
+		System.out.println();
+		System.out.println("Select one option please.");
+		System.out.println();
+		System.out.println("1. Play.");
+		System.out.println("2. Best score.");
+		System.out.println("3. Exit.");
+		
+		int option = Integer.parseInt(sc.nextLine());
 		
 		option(option);
 	}
@@ -43,8 +49,10 @@ public class Menu {
 
 
 	public void option1() {
-		System.out.println("- Please write his nickname, the dimension mxn of the matrix and k mirrors. Please: All information is separate with [ ] space");
-		String answer1 = entrie1.nextLine();
+		
+		System.out.println("Here please enter your nick name, the number of rows and columns for your matrix (mxn) and a number of mirrors (k).");
+		System.out.println("Please: All information is separate with space");
+		String answer1 = sc.nextLine();
 		String[] answer2 = answer1.split(" ");
 		control.initialize(answer2[0], Integer.parseInt(answer2[1]), Integer.parseInt(answer2[2]), Integer.parseInt(answer2[3]));
 		System.out.println(control.getGame());
@@ -53,19 +61,19 @@ public class Menu {
 	}
 	
 	public void lectura() {
-		if(control.getGame().getMirrorCon() == 0) {
-			System.out.println(control.getGame().getPlayer().getNickname() + " " + control.getGame().getPlayer().getScore());
-			System.out.println("YOU WON");
+		if(control.getGame().getConMirror() == 0) {
+			System.out.println(control.getGame().getPlayer().getNickName() + " " + control.getGame().getPlayer().getScore());
+			System.out.println("¡¡¡WOOON!!!");
 			control.getGame().calculateScore();
-			control.recibirdatos();
+			control.receiveData();
 			startMenu();
 		}else {
 			System.out.println(control.getGame().toString(true));
-			System.out.println("Type an instruction: ");
-			System.out.println("Mirrors to find: " + control.getGame().getMirrorCon());
+			System.out.println("Type command: ");
+			System.out.println("Mirrors: " + control.getGame().getConMirror());
 			control.getGame().calculateScore();
-			System.out.println(control.getGame().getPlayer().getNickname() + " " + control.getGame().getPlayer().getScore());
-			String comms = entrie1.nextLine();
+			System.out.println(control.getGame().getPlayer().getNickName() + " " + control.getGame().getPlayer().getScore());
+			String comms = sc.nextLine();
 			control.getGame().identificarComms(comms);
 			System.out.println(control.getGame());
 			lectura();
@@ -74,7 +82,7 @@ public class Menu {
 	
 	public void option2() {
 		control.inOrden(control.getRoot());
-		System.out.println(control.getParticipants());
+		System.out.println(control.getGamblers());
 		startMenu();
 		
 	}
@@ -83,7 +91,4 @@ public class Menu {
 		System.exit(0);
 		
 	}
-	
-	
-
 }

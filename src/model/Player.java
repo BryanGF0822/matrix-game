@@ -2,34 +2,28 @@ package model;
 
 public class Player {
 	
-	//Attributes
-	
-	private String nickname;
+	private String nickName;
 	private int score;
 	
-	//relations
+	private Player father;
+	private Player sonLeft;
+	private Player sonRight;
 	
-	private Player padre;
-	private Player izq;
-	private Player der;
-	
-	public Player (String nickname, int score) {
-		this.nickname = nickname;
+	public Player(String nickName, int score) {
+		this.nickName = nickName;
 		this.score = score;
 		
-		this.padre = null;
-		this.izq = null;
-		this.der = null;
-	}
-	
-	
-	
-	public String getNickname() {
-		return nickname;
+		this.father = null;
+		this.sonLeft = null;
+		this.sonRight = null; 
 	}
 
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 
 	public int getScore() {
@@ -40,38 +34,32 @@ public class Player {
 		this.score = score;
 	}
 
-	public Player getPadre() {
-		return padre;
+	public Player getFather() {
+		return father;
 	}
 
-	public void setPadre(Player padre) {
-		this.padre = padre;
+	public void setFather(Player father) {
+		this.father = father;
 	}
 
-	public Player getIzq() {
-		return izq;
+	public Player getSonLeft() {
+		return sonLeft;
 	}
 
-	public void setIzq(Player izq) {
-		this.izq = izq;
+	public void setSonLeft(Player sonLeft) {
+		this.sonLeft = sonLeft;
 	}
 
-	public Player getDer() {
-		return der;
+	public Player getSonRight() {
+		return sonRight;
 	}
 
-	public void setDer(Player der) {
-		this.der = der;
+	public void setSonRight(Player sonRight) {
+		this.sonRight = sonRight;
 	}
 	
 	public String toString() {
-		return nickname;
+		return nickName;
 	}
-
 	
-	
-	
-	
-	
-
 }
