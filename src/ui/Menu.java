@@ -15,11 +15,13 @@ public class Menu {
 	}
 	
 	public void startMenu() {
-		System.out.println("Welcome to the MatrixGame ");
-		System.out.println("¿What operation would you like to do?");
-		System.out.println("[1]. Play game");
-		System.out.println("[2]. Score´s top");
-		System.out.println("[3]. Exit the game");
+		System.out.println("===================================");
+		System.out.println("   WELCOME TO THE MIRRORS GAME");
+		System.out.println("===================================");
+		System.out.println("Please, select the option that you would like to do");
+		System.out.println("1. Play ");
+		System.out.println("2. Best Scores");
+		System.out.println("3. Exit");
 		
 		int option = entrie2.nextInt();
 		
@@ -41,9 +43,9 @@ public class Menu {
 
 
 	public void option1() {
-		System.out.println("- Please write his nickname, the dimension mxn of the matrix and k mirrors. Please: All information is separate with [,]");
+		System.out.println("- Please write his nickname, the dimension mxn of the matrix and k mirrors. Please: All information is separate with [ ] space");
 		String answer1 = entrie1.nextLine();
-		String[] answer2 = answer1.split(",");
+		String[] answer2 = answer1.split(" ");
 		control.initialize(answer2[0], Integer.parseInt(answer2[1]), Integer.parseInt(answer2[2]), Integer.parseInt(answer2[3]));
 		System.out.println(control.getGame());
 		lectura();
@@ -53,14 +55,14 @@ public class Menu {
 	public void lectura() {
 		if(control.getGame().getMirrorCon() == 0) {
 			System.out.println(control.getGame().getPlayer().getNickname() + " " + control.getGame().getPlayer().getScore());
-			System.out.println("Ganaste");
+			System.out.println("YOU WON");
 			control.getGame().calculateScore();
 			control.recibirdatos();
 			startMenu();
 		}else {
 			System.out.println(control.getGame().toString(true));
-			System.out.println("CODE: ");
-			System.out.println("Espejos restantes: " + control.getGame().getMirrorCon());
+			System.out.println("Type an instruction: ");
+			System.out.println("Mirrors to find: " + control.getGame().getMirrorCon());
 			control.getGame().calculateScore();
 			System.out.println(control.getGame().getPlayer().getNickname() + " " + control.getGame().getPlayer().getScore());
 			String comms = entrie1.nextLine();

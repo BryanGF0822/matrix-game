@@ -132,22 +132,22 @@ public class Cell {
 	
 	public String toString(){
 		if(b == true) {
-			return "[(" + "X" + "])";
+			return "[(" + "X" + ")]";
 		}else if(c == true) {
-			return "[(" +  mirror  + "])";
+			return "[(" +  mirror  +")]";
 		}else if(start == true) {
-			return "[(" +  "S"  + "])";
+			return "[(" +  "S"  + ")]";
 		}else if(stop == true) {
-			return "[(" +  "E"  + "])";
+			return "[(" +  "E"  + ")]";
 		}
 		else {
-			return "[(" + position + "])";
+			return "[(" + position + ")]";
 		}
 		
 	}
 	
 	public String toString(boolean a) {
-		return "[(" + position + "])";
+		return "[(" + position + ")]";
 	}	
 	
 	public boolean isStart() {

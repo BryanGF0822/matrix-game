@@ -105,6 +105,7 @@ public class MatrixGame {
 			String ab = comms.charAt(0)+"";
 			
 			int row = Integer.parseInt(ab);
+			@SuppressWarnings("unused")
 			String orien = comms.charAt(2) + "";
 			
 			if(recorrerMatrix(row,col, getFirst()) != null ) {
@@ -165,7 +166,7 @@ public class MatrixGame {
 			char c = comms.charAt(1);
 			
 			if(recorrerMatrix(b,c, getFirst()) != null ) {
-				//Llame método de lanzar rayo
+				//Llame mï¿½todo de lanzar rayo
 				toString();
 				disparos = disparos +1;
 				Cell temp = recorrerMatrix(b,c,getFirst());
@@ -490,6 +491,7 @@ public class MatrixGame {
 	}
 	
 	public void generateMirror(int a, int b, int mirror) { // a = 3; b = 3; mirror = 4; mirror > 9
+		@SuppressWarnings("unused")
 		String msg = "";
 		//System.out.println(mirror);
 		if(contador <= a * b) {     
